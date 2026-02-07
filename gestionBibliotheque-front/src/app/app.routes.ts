@@ -3,7 +3,9 @@ import { Inscription } from './components/inscription/inscription';
 import { Connexion } from './components/connexion/connexion';
 import { Personne } from './components/personne/personne';
 import { Personnel} from './components/personnel/personnel';
-import { Utilisateur } from './components/utilisateur/utilisateur';  
+import { Utilisateur } from './components/utilisateur/utilisateur';
+import {EmpruntFormComponent} from './components/emprunt-form/emprunt-form';
+import {Home} from './components/dashboard/home';
 
 export const routes: Routes = [
   {path:'inscription', component: Inscription},
@@ -11,7 +13,8 @@ export const routes: Routes = [
   {path:'personne', component: Personne},
   {path:'personnel', component: Personnel},
   {path:'utilisateur', component: Utilisateur},
+  {path:'emprunt-form',component:EmpruntFormComponent},
+  {path:'dashboard',component: Home}
 
   ];
 
-  
