@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "gestionBibliotheque-front": {
+    "GestionBibliotheque-front": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -19,14 +19,15 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+                "src/assets/images"
             ],
-            "styles": [
+           "styles": [
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
+
+            
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -61,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "gestionBibliotheque-front:build:production"
+              "buildTarget": "GestionBibliotheque-front:build:production"
             },
             "development": {
-              "buildTarget": "gestionBibliotheque-front:build:development"
+              "buildTarget": "GestionBibliotheque-front:build:development"
             }
           },
           "defaultConfiguration": "development"

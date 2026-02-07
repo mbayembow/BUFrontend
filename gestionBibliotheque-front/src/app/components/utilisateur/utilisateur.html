@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion des utilisateurs</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body class="bg-light min-vh-100 py-5">
+
+<div class="container">
+
+  <!-- ================= FORMULAIRE ================= -->
+  <div class="card shadow-lg border-0 rounded-4 mb-5">
+    <div class="card-body p-4 p-md-5">
+
+      <h2 class="fw-bold text-center mb-4">
+        <i class="bi bi-person-plus-fill text-primary me-2"></i>
+        Gestion des utilisateurs
+      </h2>
+
+      <form [formGroup]="utilisateur"
+            (ngSubmit)="ajouterUtilisateur()"
+            novalidate>
+
+        <div class="row g-4">
+
+          <!-- Nom -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Nom</label>
+            <input type="text" class="form-control form-control-lg"
+                   placeholder="Nom" formControlName="nom">
+          </div>
+
+          <!-- Prénom -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Prénom</label>
+            <input type="text" class="form-control form-control-lg"
+                   placeholder="Prénom" formControlName="prenom">
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Email</label>
+            <input type="email" class="form-control form-control-lg"
+                   placeholder="exemple@email.com" formControlName="email">
+          </div>
+
+          <!-- Téléphone -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Téléphone</label>
+            <input type="text" class="form-control form-control-lg"
+                   placeholder="77 000 00 00" formControlName="numTel">
+          </div>
+
+          <!-- Mot de passe -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Mot de passe</label>
+            <input type="password" class="form-control form-control-lg"
+                   placeholder="••••••••" formControlName="motDePasse">
+          </div>
+
+          <!-- Confirmation -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Confirmation</label>
+            <input type="password" class="form-control form-control-lg"
+                   placeholder="••••••••" formControlName="confirmPassword">
+          </div>
+
+          <!-- NIN -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">NIN</label>
+            <input type="text" class="form-control form-control-lg"
+                   placeholder="Numéro d'identification"
+                   formControlName="nin">
+          </div>
+
+          <!-- Nom utilisateur -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Nom d'utilisateur</label>
+            <input type="text" class="form-control form-control-lg"
+                   placeholder="username"
+                   formControlName="nomUtilisateur">
+          </div>
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-primary btn-lg w-100 mt-4"
+                [disabled]="utilisateur.invalid">
+          <i class="bi bi-plus-circle me-2"></i>
+          Ajouter l'utilisateur
+        </button>
+
+        <button class="btn btn-warning btn-sm me-2"
+                (click)="modifierUtilisateur(p, i)">
+            <i class="bi bi-pencil-square"></i>
+            modifierUtilisateur
+        </button>
+
+        <button class="btn btn-danger btn-sm"
+                (click)="supprimerUtilisateur(i)">
+            <i class="bi bi-trash"></i>
+            supprimerUtilisateur
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= TABLE ================= -->
+  <div class="card shadow border-0 rounded-4">
+    <div class="card-body p-4 p-md-5">
+
+      <h3 class="fw-bold text-center mb-4">
+        <i class="bi bi-list-ul text-primary me-2"></i>
+        Liste des utilisateurs
+      </h3>
+
+      <div class="table-responsive">
+
+        <table class="table table-hover align-middle text-center"
+               *ngIf="utilisateurs.length > 0">
+
+          <thead class="table-primary">
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Email</th>
+              <th>Téléphone</th>
+              <th>NIN</th>
+              <th>Nom utilisateur</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let p of utilisateurs; let i = index">
+              <td>{{ p.nom }}</td>
+              <td>{{ p.prenom }}</td>
+              <td>{{ p.email }}</td>
+              <td>{{ p.numTel }}</td>
+              <td>{{ p.nin }}</td>
+              <td>{{ p.nomUtilisateur }}</td>
+              <td>
+
+                
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <p *ngIf="utilisateurs.length === 0"
+         class="text-center text-muted fs-5 mt-4">
+        <i class="bi bi-info-circle me-2"></i>
+        Aucun utilisateur enregistré
+      </p>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

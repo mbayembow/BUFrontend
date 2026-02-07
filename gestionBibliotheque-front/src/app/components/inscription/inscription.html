@@ -1,0 +1,122 @@
+<body class="bg-light">
+
+<div class="container-fluid min-vh-100">
+  <div class="row min-vh-100">
+
+    <!-- SECTION GAUCHE -->
+    <div class="col-12 col-lg-6 d-flex flex-column align-items-center justify-content-center text-center p-5 bg-white">
+
+      <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+           style="width:120px; height:120px;">
+        <i class="bi bi-person-plus-fill fs-1"></i>
+      </div>
+
+      <h2 class="fw-bold mb-1">Créer un compte</h2>
+      <p class="text-muted fs-5 mb-4">
+        Inscription simple, rapide et sécurisée
+      </p>
+
+      <img
+      src="assets/images/bu.jpg"
+      alt="Inscription à la bibliothèque"
+      class="img-fluid"
+      style="max-width: 80%;"
+      />
+
+
+    </div>
+
+    <!-- SECTION DROITE -->
+    <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center p-4">
+
+      <div class="w-100" style="max-width: 850px;">
+        <div class="card border-0 shadow-lg rounded-4">
+          <div class="card-body p-5">
+
+            <!-- FORMULAIRE -->
+            <form [formGroup]="inscription" (ngSubmit)="onSubmit()" novalidate>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <label class="form-label fw-semibold">Nom</label>
+                  <input type="text" class="form-control form-control-lg" formControlName="nom">
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <label class="form-label fw-semibold">Prénom</label>
+                  <input type="text" class="form-control form-control-lg" formControlName="prenom">
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label fw-semibold">Adresse email</label>
+                <div class="input-group input-group-lg">
+                  <span class="input-group-text">
+                    <i class="bi bi-envelope text-primary"></i>
+                  </span>
+                  <input type="email"
+                         class="form-control"
+                         placeholder="exemple@email.com"
+                         formControlName="email">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <label class="form-label fw-semibold">Mot de passe</label>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text">
+                      <i class="bi bi-lock text-primary"></i>
+                    </span>
+                    <input type="password"
+                           class="form-control"
+                           formControlName="password">
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <label class="form-label fw-semibold">Confirmation</label>
+                  <input type="password"
+                         class="form-control form-control-lg"
+                         formControlName="confirmPassword">
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label fw-semibold">NIN</label>
+                <input type="text" class="form-control form-control-lg" formControlName="nin">
+              </div>
+
+              <div class="mb-5">
+                <label class="form-label fw-semibold">Nom d'utilisateur</label>
+                <input type="text" class="form-control form-control-lg" formControlName="nomUtilisateur">
+              </div>
+
+              <button type="submit"
+                      class="btn btn-primary btn-lg w-100 py-3 fw-semibold"
+                      [disabled]="inscription.invalid">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                Créer mon compte
+              </button>
+            </form>
+
+            <div class="text-center mt-4">
+              <small class="text-muted">
+                Déjà un compte ?
+                <a routerLink="/connexion"
+                   class="fw-semibold text-primary text-decoration-none">
+                  Se connecter
+                </a>
+              </small>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>

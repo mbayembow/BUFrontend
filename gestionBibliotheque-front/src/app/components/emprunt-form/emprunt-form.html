@@ -1,0 +1,33 @@
+<div class="card mb-4 shadow rounded-4">
+  <div class="card-header bg-primary-subtle text-primary">Créer un emprunt</div>
+  <div class="card-body">
+    <form [formGroup]="empruntForm" (ngSubmit)="enregistrer()">
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">ID Utilisateur</label>
+          <input type="number" class="form-control" formControlName="idUtilisateur" placeholder="ID Utilisateur">
+          <div *ngIf="empruntForm.get('idUtilisateur')?.invalid && empruntForm.get('idUtilisateur')?.touched" class="text-danger small mt-1">
+            L'ID utilisateur est requis et > 0
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">ID Livre</label>
+          <input type="number" class="form-control" formControlName="idLivre" placeholder="ID Livre">
+          <div *ngIf="empruntForm.get('idLivre')?.invalid && empruntForm.get('idLivre')?.touched" class="text-danger small mt-1">
+            L'ID livre est requis et > 0
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="message" class="alert alert-success mt-3">{{ message }}</div>
+      <div *ngIf="erreur" class="alert alert-danger mt-3">{{ erreur }}</div>
+
+      <div class="mt-4 text-end">
+        <button class="btn btn-outline-danger me-2" type="reset" (click)="empruntForm.reset()">Annuler</button>
+        <button class="btn btn-success" type="submit">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
