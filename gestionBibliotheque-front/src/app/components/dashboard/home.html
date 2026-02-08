@@ -1,5 +1,48 @@
-<main class="col-md-12 ms-sm-auto col-lg-10 p-4">
-  <div class="d-flex justify-content-center align-items-center vh-10">
-    <div class="text-md-start">Welcome to dashboard</div>
+<div class="container mt-5">
+
+  <h3 class="mb-4 text-center fw-bold">
+    📊 Tableau de bord – Gestion Bibliothèque
+  </h3>
+
+  <div class="row g-4">
+
+    <div class="col-md-3">
+      <div class="card shadow text-center border-0">
+        <div class="card-body">
+          <h5>📚 Livres</h5>
+          <h2 class="text-success">{{ stats.livres }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow text-center border-0">
+        <div class="card-body">
+          <h5>✍️ Auteurs</h5>
+          <h2 class="text-primary">{{ stats.auteurs }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow text-center border-0">
+        <div class="card-body">
+          <h5>🗂️ Catégories</h5>
+          <h2 class="text-warning">{{ stats.categories }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow text-center border-0">
+        <div class="card-body">
+          <h5>🏢 Éditeurs</h5>
+          <h2 class="text-danger">{{ stats.editeurs }}</h2>
+        </div>
+      </div>
+    </div>
+
   </div>
-</main>
+
+</div>
+

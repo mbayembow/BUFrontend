@@ -1,0 +1,105 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-success text-white text-center">
+          <h4 class="mb-0">📚 Gestion des Livres</h4>
+        </div>
+
+        <div class="card-body">
+          <form (ngSubmit)="addBook()" class="row g-4">
+
+            <!-- Titre -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Titre</label>
+              <input class="form-control"
+                     placeholder="Titre du livre"
+                     [(ngModel)]="newBook.title"
+                     name="title"
+                     required>
+            </div>
+
+            <!-- Référence -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Référence</label>
+              <input class="form-control"
+                     placeholder="Référence"
+                     [(ngModel)]="newBook.reference"
+                     name="reference"
+                     required>
+            </div>
+
+            <!-- ISBN -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">ISBN</label>
+              <input class="form-control"
+                     placeholder="ISBN du livre"
+                     [(ngModel)]="newBook.isbn"
+                     name="isbn"
+                     required>
+            </div>
+
+            <!-- Auteur -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Nom de l’auteur</label>
+              <input class="form-control"
+                     placeholder="Auteur"
+                     [(ngModel)]="newBook.author"
+                     name="author"
+                     required>
+            </div>
+
+            <!-- Catégorie -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Catégorie</label>
+              <select class="form-select"
+                      [(ngModel)]="newBook.category"
+                      name="category"
+                      required>
+                <option value="">-- Choisir une catégorie --</option>
+                <option *ngFor="let cat of categories" [value]="cat">
+                  {{ cat }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Disponibilité -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Disponibilité</label>
+              <select class="form-select"
+                      [(ngModel)]="newBook.available"
+                      name="available">
+                <option [ngValue]="true">Disponible</option>
+                <option [ngValue]="false">Indisponible</option>
+              </select>
+            </div>
+
+            <!-- Boutons -->
+            <div class="col-12 d-flex justify-content-center gap-3 mt-4">
+              <button type="submit" class="btn btn-success px-4">
+                💾 Enregistrer
+              </button>
+
+              <button type="button"
+                      class="btn btn-warning px-4"
+                      (click)="updateBook()"
+                      [disabled]="!isEditMode">
+                ✏️ Modifier
+              </button>
+
+              <button type="button"
+                      class="btn btn-outline-secondary px-4"
+                      (click)="resetForm()">
+                ❌ Annuler
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

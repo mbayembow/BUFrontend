@@ -1,0 +1,73 @@
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">🗂️ Gestion des Catégories</h4>
+    </div>
+
+    <div class="card-body">
+
+      <!-- Formulaire -->
+      <form (ngSubmit)="isEditMode ? updateCategory() : addCategory()"
+            class="row g-3 mb-4">
+
+        <div class="col-md-8">
+          <input type="text"
+                 class="form-control"
+                 [(ngModel)]="newCategory.name"
+                 name="name"
+                 placeholder="Nom de la catégorie"
+                 required>
+        </div>
+
+        <div class="col-md-4 d-flex gap-2">
+          <button class="btn btn-success w-100" type="submit">
+            {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+          </button>
+
+          <button class="btn btn-secondary w-100"
+                  type="button"
+                  (click)="resetForm()">
+            Annuler
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Tableau -->
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let cat of categories; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ cat.name }}</td>
+            <td class="text-center">
+              <button class="btn btn-warning btn-sm me-2"
+                      (click)="editCategory(cat)">
+                Modifier
+              </button>
+              <button class="btn btn-danger btn-sm"
+                      (click)="deleteCategory(cat.id)">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="categories.length === 0">
+            <td colspan="3" class="text-center text-muted">
+              Aucune catégorie enregistrée
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
