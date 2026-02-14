@@ -1,60 +1,67 @@
-<nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid col-12  ">
-    <!-- Liens -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="bi bi-list fs-4 float-start text-dark"></i></a>
-      </li>
-    </ul>
-    <div class="collapse navbar-collapse " id="navbarBibliotheque ">
-      <form class="d-flex ms-auto">
-        <input  class="form-control me-2 " type="search" placeholder="Rechercher un livre">
-        <button class="btn btn-outline-dark bg-white text-dark " type="submit">Rechercher</button>
-      </form>
-      <!-- Auth -->
-      <ul class="navbar-nav ms-auto ms-5">
-        <li class="nav-item dropdown ">
-          <a
-            class="nav-link dropdown-toggle text-white"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-          >
-            {{ nom }}
-          </a>
+<nav class="navbar navbar-expand bg-white shadow-sm col-12 ">
+  <div class="container-fluid">
 
-          <ul class="dropdown-menu shadow rounded-3 me-auto">
+    <!-- Breadcrumb / titre -->
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-house-door"></i>
+      <span class="text-muted">Tableau de bord</span>
+    </div>
 
-            <li>
-              <a class="dropdown-item" routerLink="/profil">
-                <i class="bi bi-person bg-secondary-subtle rounded-2 px-1 p-0.5"></i>
-                Mon Profil
-              </a>
-            </li>
+    <!-- Partie droite -->
+    <div class="ms-auto d-flex align-items-center gap-3">
 
-            <li>
-              <a class="dropdown-item" href="#">
-                <i class="bi bi-question-circle bg-secondary-subtle rounded-2 px-1 p-0.5"></i>
-                Aide
-              </a>
-            </li>
+      <!-- Notifications -->
+      <div class="position-relative">
+        <i class="bi bi-bell fs-5"></i>
+        <span
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          3
+        </span>
+      </div>
 
-            <li><hr class="dropdown-divider"></li>
+      <!-- Profil utilisateur -->
+      <div class="dropdown">
+        <a
+          class="d-flex align-items-center text-decoration-none dropdown-toggle"
+          href="#"
+          data-bs-toggle="dropdown"
+        >
+          <!-- Avatar -->
+          <div class="avatar me-2">
+            {{ userInitials }}
+          </div>
 
-            <li>
-              <button
-                class="dropdown-item text-danger"
-                (click)="logout()">
-                <i class="bi bi-box-arrow-right bg-danger-subtle rounded-2 px-1 p-0.5"></i>
-                Déconnexion
-              </button>
-            </li>
+          <!-- Nom -->
+          <span class="fw-semibold">
+            {{ user?.prenom }}
+            {{user?.nom}}
+          </span>
+        </a>
 
-          </ul>
-        </li>
+        <!-- Menu -->
+        <ul class="dropdown-menu dropdown-menu-end shadow">
+          <li>
+            <a class="dropdown-item" routerLink="/profil">
+              <i class="bi bi-person bg-secondary-subtle rounded-2 px-1 p-0.5"></i>
+              Mon profil
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/aide">
+              <i class="bi bi-question-circle bg-secondary-subtle rounded-2 px-1 p-0.5"></i>
+              Aide
+            </a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <button class="dropdown-item text-danger" (click)="logout()">
+              <i class="bi bi-box-arrow-right bg-danger-subtle rounded-2 px-1 p-0.5"></i>
+              Déconnexion
+            </button>
+          </li>
+        </ul>
+      </div>
 
-      </ul>
     </div>
   </div>
 </nav>
-

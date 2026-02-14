@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmpruntService } from '../../services/emprunt';
-import { EmpruntFormComponent} from '../emprunt-form/emprunt-form';
+// import { EmpruntFormComponent} from '../emprunt-form/emprunt-form';
 import { EmpruntListComponent} from '../emprunt-list/emprunt-list';
 import {Emprunt} from '../../models/emprunt';
 
 @Component({
   selector: 'app-emprunt-page',
   standalone: true,
-  imports: [CommonModule, EmpruntFormComponent, EmpruntListComponent],
+  imports: [CommonModule,EmpruntListComponent],
   template: `
     <div class="container py-4">
       <h4 class="fw-bold mb-3"><i class="bi bi-journal-arrow-down"></i> Gestion des emprunts</h4>
 
-      <app-emprunt-form (miseAJour)="chargerEmprunts()"></app-emprunt-form>
+<!--      <app-emprunt-form (miseAJour)="chargerEmprunts()"></app-emprunt-form>-->
 
       <app-emprunt-list
         [emprunts]="emprunts"

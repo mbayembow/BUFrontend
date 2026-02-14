@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {Emprunt} from '../models/emprunt';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,7 @@ import {Emprunt} from '../models/emprunt';
 export class EmpruntService {
 
   private baseUrl = 'http://localhost:8080/api/emprunts';
+  private currentUserId = 1; // TODO: remplacer par l'ID de l'utilisateur connecté
 
   constructor(private http: HttpClient) {}
 
@@ -44,4 +45,14 @@ export class EmpruntService {
   supprimer(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  getParStatut(statut: string): Observable<Emprunt[]> {
+    return this.http.get<Emprunt[]>(`${this.baseUrl}/statut/${statut}`);
+  }
+
+  // --- Nouvelle méthode pour l'utilisateur courant ---
+  getMesEmprunts(): Observable<Emprunt[]> {
+    return this.getParUtilisateur(this.currentUserId);
+  }
+
 }

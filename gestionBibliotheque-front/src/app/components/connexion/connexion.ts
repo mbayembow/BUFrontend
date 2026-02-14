@@ -1,48 +1,94 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ConnexionService } from '../../services/connexion-service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-connexion',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './connexion.html',
-  styleUrls: ['./connexion.css']
+  styleUrls: ['./connexion.css'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ]
 })
-export class Connexion implements OnInit {
-goToInscription() {
-throw new Error('Method not implemented.');
-}
+export class ConnexionComponent implements OnInit {
 
   connexion!: FormGroup;
-  showPassword = false;
+  submitted = false;
+  erreur: string = '';
 
   constructor(
     private fb: FormBuilder,
+    private connexionService: ConnexionService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.connexion = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      remember: [false],
+      type: ['USER'] // USER par défaut
     });
   }
 
+  get f() {
+    return this.connexion.controls;
+  }
+
   onSubmit(): void {
+    this.submitted = true;
+    this.erreur = '';
+
     if (this.connexion.invalid) {
-      this.connexion.markAllAsTouched();
       return;
     }
 
-    // Données du formulaire
-    console.log(this.connexion.value);
+    const { email, password, remember, type } = this.connexion.value;
 
-    // TODO: appel API de connexion ici
+    if (type === 'ADMIN') {
+      // Login admin
+      this.connexionService.login1(email, password).subscribe({
+        next: (admin) => {
+          // Stocke dans localStorage sous une clé commune
+          localStorage.setItem('currentUser', JSON.stringify({
+            type: 'ADMIN',
+            data: admin
+          }));
 
-    // Redirection après succès
-    this.router.navigate(['/inscription']);
-    // ou '/dashboard'
+          if (remember) {
+            localStorage.setItem('remember', 'true');
+          }
+
+          // Redirection
+          this.router.navigate(['/admin/dashboard']);
+        },
+        error: () => {
+          this.erreur = 'Email ou mot de passe incorrect';
+        }
+      });
+    } else {
+      // Login utilisateur
+      this.connexionService.login(email, password).subscribe({
+        next: (user) => {
+          localStorage.setItem('currentUser', JSON.stringify({
+            type: 'USER',
+            data: user
+          }));
+
+          if (remember) {
+            localStorage.setItem('remember', 'true');
+          }
+
+          this.router.navigate(['/dashboard-user']);
+        },
+        error: () => {
+          this.erreur = 'Email ou mot de passe incorrect';
+        }
+      });
+    }
   }
 }

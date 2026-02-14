@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+/*.marquee-text {*/
+/*  display: inline-block;*/
+/*  white-space: nowrap;*/
+/*  animation: marquee 8s linear infinite;*/
+/*}*/
+.marquee-text {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.moving-all-directions {
+  animation: moveCrazy 4s ease-in-out infinite;
+}
+
+@keyframes moveCrazy {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(40px, -20px); }
+  40%  { transform: translate(-30px, 30px); }
+  60%  { transform: translate(30px, 20px); }
+  80%  { transform: translate(-20px, -30px); }
+  100% { transform: translate(0, 0); }
+}
+
+
+

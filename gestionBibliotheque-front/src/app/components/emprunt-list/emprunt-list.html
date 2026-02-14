@@ -4,6 +4,7 @@
     <th>ID</th>
     <th>Livre</th>
     <th>Utilisateur</th>
+<!--    <th>Date Emprunt</th>-->
     <th>Statut</th>
     <th>Actions</th>
   </tr>
@@ -12,7 +13,8 @@
   <tr *ngFor="let e of emprunts">
     <td>{{ e.idEmprunt }}</td>
     <td>{{ e.livre?.titre }}</td>
-    <td>{{ e.utilisateur?.nom }}</td>
+    <td>{{ e.utilisateur?.prenom }}</td>
+<!--    <td>{{e.emprunt?.dateEmprunt}}</td>-->
     <td><span class="badge bg-info">{{ e.statut }}</span></td>
     <td>
       <button class="btn btn-success btn-sm me-1" (click)="valider.emit(e.idEmprunt)">Valider</button>

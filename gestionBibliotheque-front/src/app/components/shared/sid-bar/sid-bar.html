@@ -1,73 +1,68 @@
- <div class="d-flex">
+<aside [class.collapsed]="isCollapsed" class="bg-secondary-subtle d-flex flex-column vh-100 border-end w-auto">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar p-3 d-flex flex-column">
-
-      <!-- Logo -->
-      <div class="d-flex align-items-center gap-2 mb-3">
-        <span class="fs-3 fw-bold bg-dark text-white px-2 rounded">B</span>
-        <span class="fs-5 fw-semibold">Bibliotheque</span>
-      </div>
-
-      <hr>
-
-      <!-- Menu -->
-      <ul class="nav nav-pills flex-column gap-2 mb-auto">
-
-        <li class="nav-item">
-          <a class="nav-link bg-secondary-subtle text-dark" href="dashboard">
-            <i class="bi bi-speedometer2 text-tabac"></i>
-            Dashboard
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link bg-dark-subtle text-dark" href="#">
-            <i class="bi bi-person gap-5 text-white"></i>
-            Author
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link bg-secondary-subtle text-dark" href="#">
-            <i class="bi bi-book gap-5 text-brown"></i>
-            book
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link bg-primary-subtle text-dark" href="emprunt-form">
-<!--            <i class="bi bi-house text-white"></i>-->
-            <i class="bi bi-bookmark-plus text-primary"></i>
-            Emprunt
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link bg-dark-subtle text-dark" href="#">
-            <i class="bi bi-table text-white"></i>
-            Cathalogue
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link bg-primary-subtle text-dark" href="#">
-                <i class="bi bi-person-fill gap-5 text-primary"></i>
-            User
-          </a>
-        </li>
+  <!-- Toggle + Logo -->
+  <button class="btn bg-primary-subtle d-flex align-items-center gap-2 p-2 border-0" (click)="toggleSidebar()">
+    <i class="bi text-primary" [ngClass]="isCollapsed ? 'bi-arrow-right-square' : 'bi-arrow-left-square'"></i>
+    <span *ngIf="!isCollapsed">
+<!--      <span class="fs-3 fw-bold bg-light text-primary px-2 rounded">B</span>-->
+      <span class="fs-5 fw-semibold text-primary p-2">Bibliothèque</span>
+    </span>
+  </button>
+  <hr>
 
 
-      </ul>
+  <span *ngIf="!isCollapsed">
+    <button class="btn bg-primary-subtle d-flex align-items-center gap-2 p-2 border-1  container-fluid my-1">
+    <!-- Avatar -->
+    <div class="avatar me-2">
+      {{ userInitials }}
+    </div>
 
-      <hr>
+      <!-- Nom -->
+    <span class="fw-semibold text-primary">
+<!--            {{ user?.prenom}}-->
+            {{ user?.nom }}
+          </span>
+  </button>
+  </span>
 
-      <!-- Profil -->
-<!--      <div class="sidebar-footer d-flex align-items-center gap-2">-->
-<!--        <img src="https://i.pravatar.cc/40" class="rounded-circle" alt="profil">-->
-<!--        <span class="fw-semibold">{{nom}}</span>-->
-<!--        <i class="bi bi-caret-down-fill ms-auto"></i>-->
-<!--      </div>-->
 
-    </aside>
- </div>
+  <hr>
+
+
+  <!-- Menu -->
+  <ul class="nav nav-pills flex-column gap-2 flex-grow-1">
+    <li class="nav-item">
+      <a class="nav-link" href="dashboard-user">
+        <i class="bi bi-speedometer2"></i>
+        <span *ngIf="!isCollapsed">Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="bi bi-person"></i>
+        <span *ngIf="!isCollapsed">Author</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="bi bi-book"></i>
+        <span *ngIf="!isCollapsed">Book</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="emprunt-form">
+        <i class="bi bi-bookmark-plus"></i>
+        <span *ngIf="!isCollapsed">Emprunt</span>
+      </a>
+    </li>
+  </ul>
+
+  <hr>
+
+  <!-- Profil -->
+  <div class="sidebar-footer d-flex align-items-center gap-2 p-2" *ngIf="!isCollapsed">
+    <img src="https://i.pravatar.cc/40" class="rounded-circle" alt="profil">
+    <span class="fw-semibold">{{nom}}</span>
+  </div>
+</aside>
