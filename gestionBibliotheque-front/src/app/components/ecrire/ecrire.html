@@ -1,0 +1,69 @@
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h4>✍️ Association Auteur ↔ Livre</h4>
+    </div>
+
+    <div class="card-body">
+
+      <!-- Sélection -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label>Auteur</label>
+          <select class="form-select" [(ngModel)]="idAuteur">
+            <option *ngFor="let a of auteurs" [value]="a.idAuteur">
+              {{ a.nom }} {{ a.prenom }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label>Livre</label>
+          <select class="form-select" [(ngModel)]="idLivre">
+            <option *ngFor="let l of livres" [value]="l.idLivre">
+              {{ l.titre }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Boutons -->
+      <div class="d-flex gap-2 mb-4">
+        <button class="btn btn-success" (click)="associer()">Associer</button>
+        <button class="btn btn-danger" (click)="dissocier()">Dissocier</button>
+      </div>
+
+      <hr>
+
+      <!-- Récupération -->
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn btn-outline-primary mb-2"
+                  (click)="chargerAuteursParLivre()">
+            Auteurs du livre
+          </button>
+
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let id of auteursDuLivre">
+              ID Auteur : {{ id }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <button class="btn btn-outline-secondary mb-2"
+                  (click)="chargerLivresParAuteur()">
+            Livres de l’auteur
+          </button>
+
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let id of livresDeLAuteur">
+              ID Livre : {{ id }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

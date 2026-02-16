@@ -7,33 +7,23 @@ import { Observable } from 'rxjs';
 })
 export class EditeurService {
 
-  // URL du backend Spring Boot
   private apiUrl = 'http://localhost:8080/api/editeurs';
 
   constructor(private http: HttpClient) {}
 
-  // 🔹 Ajouter un éditeur
-  ajouterEditeur(editeur: any): Observable<string> {
+  getAll(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  add(editeur: any): Observable<any> {
     return this.http.post(this.apiUrl, editeur, { responseType: 'text' });
   }
 
-  // 🔹 Modifier un éditeur
-  modifierEditeur(id: number, editeur: any): Observable<string> {
+  update(id: number, editeur: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, editeur, { responseType: 'text' });
   }
 
-  // 🔹 Supprimer un éditeur
-  supprimerEditeur(id: number): Observable<void> {
+  delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  // 🔹 Récupérer un éditeur par ID
-  getEditeurById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
-  }
-
-  // 🔹 Récupérer tous les éditeurs
-  getTousLesEditeurs(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
   }
 }

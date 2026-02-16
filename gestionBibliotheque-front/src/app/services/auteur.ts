@@ -7,40 +7,23 @@ import { Observable } from 'rxjs';
 })
 export class AuteurService {
 
-  // URL du backend Spring Boot
   private apiUrl = 'http://localhost:8080/api/auteurs';
 
   constructor(private http: HttpClient) {}
 
-  // 🔹 Créer un auteur
-  createAuteur(auteur: any): Observable<any> {
-    return this.http.post(this.apiUrl, auteur);
-  }
-
-  // 🔹 Modifier un auteur
-  updateAuteur(id: number, auteur: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, auteur);
-  }
-
-  // 🔹 Supprimer un auteur
-  deleteAuteur(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  // 🔹 Récupérer un auteur par ID
-  getAuteurById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
-  }
-
-  // 🔹 Récupérer tous les auteurs
-  getAllAuteurs(): Observable<any[]> {
+  getAll(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  // 🔹 Rechercher des auteurs
-  searchAuteurs(critere: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/search`, {
-      params: { critere }
-    });
+  add(auteur: any): Observable<any> {
+    return this.http.post(this.apiUrl, auteur);
+  }
+
+  update(id: number, auteur: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, auteur);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

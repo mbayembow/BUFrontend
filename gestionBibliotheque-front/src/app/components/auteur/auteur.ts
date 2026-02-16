@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuteurService } from '../../services/auteur';
 
 @Component({
   selector: 'app-auteur',
@@ -8,49 +9,66 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule],
   templateUrl: './auteur.html'
 })
-export class AuteurComponent {
+export class AuteurComponent implements OnInit {
 
-  // Mode édition
-  isEditMode: boolean = false;
+  isEditMode = false;
 
-  // Auteur courant
   newAuteur: any = {
+    idAuteur: null,
     nom: '',
     prenom: '',
     nationalite: ''
   };
 
-  // Liste locale des auteurs (simulation)
   auteurs: any[] = [];
 
-  // Ajouter auteur
-  addAuteur(): void {
-    this.auteurs.push({ ...this.newAuteur });
-    console.log('Auteur ajouté :', this.newAuteur);
-    this.resetForm();
+  constructor(private auteurService: AuteurService) {}
+
+  ngOnInit(): void {
+    this.loadAuteurs();
   }
 
-  // Préparer la modification
+  // 🔄 Récupérer les auteurs
+  loadAuteurs(): void {
+    this.auteurService.getAll().subscribe({
+      next: (data) => this.auteurs = data,
+      error: (err) => console.error('Erreur chargement auteurs', err)
+    });
+  }
+
+  // ➕ Ajouter
+  addAuteur(): void {
+    this.auteurService.add(this.newAuteur).subscribe(() => {
+      this.loadAuteurs();
+      this.resetForm();
+    });
+  }
+
+  // ✏️ Préparer modification
   editAuteur(auteur: any): void {
     this.newAuteur = { ...auteur };
     this.isEditMode = true;
   }
 
-  // Modifier auteur
+  // ✏️ Modifier
   updateAuteur(): void {
-    console.log('Auteur modifié :', this.newAuteur);
-    this.isEditMode = false;
-    this.resetForm();
+    this.auteurService.update(this.newAuteur.idAuteur, this.newAuteur)
+      .subscribe(() => {
+        this.loadAuteurs();
+        this.resetForm();
+      });
   }
 
-  // Supprimer auteur
-  deleteAuteur(index: number): void {
-    this.auteurs.splice(index, 1);
+  // 🗑️ Supprimer
+  deleteAuteur(auteur: any): void {
+    this.auteurService.delete(auteur.idAuteur).subscribe(() => {
+      this.loadAuteurs();
+    });
   }
 
-  // Reset formulaire
   resetForm(): void {
     this.newAuteur = {
+      idAuteur: null,
       nom: '',
       prenom: '',
       nationalite: ''

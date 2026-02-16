@@ -34,6 +34,8 @@ export const routes: Routes = [
       { path: 'emprunt-list', component: EmpruntListComponent },
       { path: 'emprunt-page', component: EmpruntPageComponent },
       { path: 'all-emprunt', component: AllEmprunt },
+      {path:'editeur',component: EditeurComponent},
+      {path:'ecrire',component: EcrireComponent},
 
       // Admin routes
       { path: 'admin/dashboard', component: DashboardAdmin }

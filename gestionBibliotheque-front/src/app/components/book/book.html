@@ -1,8 +1,8 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-lg-10">
 
-      <div class="card shadow-lg border-0">
+      <div class="card shadow border-0">
         <div class="card-header bg-success text-white text-center">
           <h4 class="mb-0">📚 Gestion des Livres</h4>
         </div>
@@ -14,9 +14,8 @@
             <div class="col-md-6">
               <label class="form-label fw-semibold">Titre</label>
               <input class="form-control"
-                     placeholder="Titre du livre"
-                     [(ngModel)]="newBook.title"
-                     name="title"
+                     [(ngModel)]="newBook.titre"
+                     name="titre"
                      required>
             </div>
 
@@ -24,7 +23,6 @@
             <div class="col-md-6">
               <label class="form-label fw-semibold">Référence</label>
               <input class="form-control"
-                     placeholder="Référence"
                      [(ngModel)]="newBook.reference"
                      name="reference"
                      required>
@@ -34,58 +32,90 @@
             <div class="col-md-6">
               <label class="form-label fw-semibold">ISBN</label>
               <input class="form-control"
-                     placeholder="ISBN du livre"
                      [(ngModel)]="newBook.isbn"
                      name="isbn"
                      required>
             </div>
 
-            <!-- Auteur -->
+            <!-- Statut -->
             <div class="col-md-6">
-              <label class="form-label fw-semibold">Nom de l’auteur</label>
-              <input class="form-control"
-                     placeholder="Auteur"
-                     [(ngModel)]="newBook.author"
-                     name="author"
+              <label class="form-label fw-semibold">Statut</label>
+              <select class="form-select"
+                      [(ngModel)]="newBook.status"
+                      name="status"
+                      required>
+                <option value="">-- Choisir --</option>
+                <option value="Disponible">Disponible</option>
+                <option value="NonDisponible">Non disponible</option>
+              </select>
+            </div>
+
+            <!-- Stock -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Stock</label>
+              <input type="number"
+                     class="form-control"
+                     [(ngModel)]="newBook.stock"
+                     name="stock"
+                     min="0"
                      required>
             </div>
 
-            <!-- Catégorie -->
+            <!-- Quantité -->
             <div class="col-md-6">
-              <label class="form-label fw-semibold">Catégorie</label>
-              <select class="form-select"
-                      [(ngModel)]="newBook.category"
-                      name="category"
-                      required>
-                <option value="">-- Choisir une catégorie --</option>
-                <option *ngFor="let cat of categories" [value]="cat">
-                  {{ cat }}
-                </option>
-              </select>
+              <label class="form-label fw-semibold">Quantité</label>
+              <input type="number"
+                     class="form-control"
+                     [(ngModel)]="newBook.quantite"
+                     name="quantite"
+                     min="0"
+                     required>
             </div>
 
-            <!-- Disponibilité -->
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Disponibilité</label>
-              <select class="form-select"
-                      [(ngModel)]="newBook.available"
-                      name="available">
-                <option [ngValue]="true">Disponible</option>
-                <option [ngValue]="false">Indisponible</option>
-              </select>
-            </div>
+            <!-- ID Auteur -->
+<div class="col-md-3">
+  <label class="form-label fw-semibold">ID Auteur</label>
+  <input type="number"
+         class="form-control"
+         [(ngModel)]="newBook.idAuteur"
+         name="idAuteur"
+         required>
+</div>
+
+<!-- ID Catégorie -->
+<div class="col-md-3">
+  <label class="form-label fw-semibold">ID Catégorie</label>
+  <input type="number"
+         class="form-control"
+         [(ngModel)]="newBook.idCategorie"
+         name="idCategorie"
+         required>
+</div>
+
+<!-- ID Éditeur -->
+<div class="col-md-3">
+  <label class="form-label fw-semibold">ID Éditeur</label>
+  <input type="number"
+         class="form-control"
+         [(ngModel)]="newBook.idEditeur"
+         name="idEditeur"
+         required>
+</div>
+
+<!-- ✅ ID Personnel -->
+<div class="col-md-3">
+  <label class="form-label fw-semibold">ID Personnel</label>
+  <input type="number"
+         class="form-control"
+         [(ngModel)]="newBook.idPersonnel"
+         name="idPersonnel"
+         required>
+</div>
 
             <!-- Boutons -->
             <div class="col-12 d-flex justify-content-center gap-3 mt-4">
               <button type="submit" class="btn btn-success px-4">
                 💾 Enregistrer
-              </button>
-
-              <button type="button"
-                      class="btn btn-warning px-4"
-                      (click)="updateBook()"
-                      [disabled]="!isEditMode">
-                ✏️ Modifier
               </button>
 
               <button type="button"
@@ -99,7 +129,54 @@
         </div>
       </div>
 
+      <!-- LISTE DES LIVRES -->
+      <div class="card mt-4 shadow-sm">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">📖 Liste des livres</h5>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover mb-0">
+            <thead class="table-success">
+              <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>ISBN</th>
+                <th>Statut</th>
+                <th>Stock</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let book of livres">
+                <td>{{ book.idLivre }}</td>
+                <td>{{ book.titre }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>
+                  <span class="badge"
+                        [ngClass]="book.status === 'Disponible' ? 'bg-success' : 'bg-danger'">
+                    {{ book.status }}
+                  </span>
+                </td>
+                <td>{{ book.stock }}</td>
+                <td class="text-center">
+                  <button class="btn btn-sm btn-danger"
+                          (click)="deleteBook(book.idLivre)">
+                    🗑 Supprimer
+                  </button>
+                </td>
+              </tr>
+
+              <tr *ngIf="livres.length === 0">
+                <td colspan="6" class="text-center text-muted">
+                  Aucun livre enregistré
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-
