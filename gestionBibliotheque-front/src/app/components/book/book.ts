@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BookService } from '../../services/book';
 
 @Component({
   selector: 'app-book',
@@ -9,51 +10,105 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './book.html',
   styleUrls: ['./book.css']
 })
-export class BookComponent {
+export class BookComponent implements OnInit {
 
-  // Mode édition
-  isEditMode: boolean = false;
+  livres: any[] = [];
 
-  // Liste des catégories (temporaire)
-  categories: string[] = [
-    'Roman',
-    'Science',
-    'Histoire',
-    'Informatique',
-    'Mathématiques'
-  ];
-
-  // Objet Livre
   newBook: any = {
-    title: '',
+    titre: '',
     reference: '',
-    isbn: '',          // ✅ AJOUT ISBN
-    category: '',
-    available: true
+    isbn: '',
+    status: '',
+    stock: 0,
+    quantite: 0,
+    imageUrl: '',
+    idAuteur: null,
+    idCategorie: null,
+    idEditeur: null,
+    idPersonnel: null   // ✅ AJOUT ICI
   };
 
-  // Ajouter un livre
+  constructor(private bookService: BookService) {}
+
+  ngOnInit(): void {
+    this.loadBooks();
+  }
+
+  // 🔄 Charger tous les livres
+  loadBooks(): void {
+    this.bookService.getAllBooks().subscribe({
+      next: (data) => {
+        this.livres = data;
+      },
+      error: (err) => {
+        console.error('Erreur chargement livres', err);
+      }
+    });
+  }
+
+  // ➕ Ajouter un livre
   addBook(): void {
-    console.log('Livre ajouté :', this.newBook);
-    this.resetForm();
+
+    const payload = {
+      titre: this.newBook.titre,
+      reference: this.newBook.reference,
+      isbn: this.newBook.isbn,
+      status: this.newBook.status,
+      stock: this.newBook.stock,
+      quantite: this.newBook.quantite,
+      imageUrl: this.newBook.imageUrl,
+
+      // ✅ Relations ManyToOne format correct
+      auteur: { idAuteur: this.newBook.idAuteur },
+      categorie: { idCategorie: this.newBook.idCategorie },
+      editeur: { idEditeur: this.newBook.idEditeur },
+      personnel: { idPersonnel: this.newBook.idPersonnel }
+    };
+
+    console.log("Payload envoyé :", payload); // 🔎 DEBUG
+
+    this.bookService.addBook(payload).subscribe({
+      next: () => {
+        alert('Livre ajouté avec succès');
+        this.resetForm();
+        this.loadBooks();
+      },
+      error: (err) => {
+        console.error('Erreur ajout livre', err);
+        alert('Erreur lors de l’ajout du livre');
+      }
+    });
   }
 
-  // Modifier un livre
-  updateBook(): void {
-    console.log('Livre modifié :', this.newBook);
-    this.isEditMode = false;
-    this.resetForm();
+  // 🗑️ Supprimer
+  deleteBook(id: number): void {
+    if (!confirm('Supprimer ce livre ?')) return;
+
+    this.bookService.deleteBook(id).subscribe({
+      next: () => {
+        alert('Livre supprimé');
+        this.loadBooks();
+      },
+      error: (err) => {
+        console.error('Erreur suppression', err);
+      }
+    });
   }
 
-  // Réinitialiser le formulaire
+  // ♻️ Reset
   resetForm(): void {
     this.newBook = {
-      title: '',
+      titre: '',
       reference: '',
-      isbn: '',        // ✅ RESET ISBN
-      category: '',
-      available: true
+      isbn: '',
+      status: '',
+      stock: 0,
+      quantite: 0,
+      imageUrl: '',
+      idAuteur: null,
+      idCategorie: null,
+      idEditeur: null,
+      idPersonnel: null
     };
-    this.isEditMode = false;
   }
 }

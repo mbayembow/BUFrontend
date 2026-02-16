@@ -1,0 +1,74 @@
+<div class="container mt-5">
+
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white text-center">
+      <h4>🏢 Gestion des Éditeurs</h4>
+    </div>
+
+    <div class="card-body">
+      <form (ngSubmit)="save()" class="row g-3">
+
+        <div class="col-md-6">
+          <label class="form-label">Nom</label>
+          <input class="form-control"
+                 [(ngModel)]="editeur.nom"
+                 name="nom"
+                 required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Date de création</label>
+          <input type="date"
+                 class="form-control"
+                 [(ngModel)]="editeur.date"
+                 name="date">
+        </div>
+
+        <div class="col-12 text-center mt-3">
+          <button class="btn btn-success me-2" type="submit">
+            {{ isEditMode ? '✏️ Modifier' : '➕ Ajouter' }}
+          </button>
+
+          <button type="button"
+                  class="btn btn-secondary"
+                  (click)="reset()">
+            ❌ Annuler
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- LISTE -->
+  <div class="card shadow mt-4">
+    <div class="card-body">
+      <table class="table table-striped text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let e of editeurs">
+            <td>{{ e.idEditeur }}</td>
+            <td>{{ e.nom }}</td>
+            <td>{{ e.date }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2"
+                      (click)="edit(e)">✏️</button>
+              <button class="btn btn-danger btn-sm"
+                      (click)="delete(e.idEditeur)">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+
+</div>

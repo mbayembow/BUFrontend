@@ -1,6 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment.development';
+
+interface Category {
+  idCategorie: number;
+  nom: string;
+  description?: string;
+}
 
 @Component({
   selector: 'app-category',
@@ -9,47 +17,76 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './category.html',
   styleUrls: ['./category.css']
 })
-export class CategoryComponent {
+export class CategoryComponent implements OnInit {
 
-  categories: any[] = [];
+  categories: Category[] = [];
   isEditMode = false;
   selectedCategoryId!: number;
 
-  newCategory: any = {
-    name: ''
+  private apiUrl = environment.apiUrl + '/categories';
+
+  newCategory = {
+    nom: '',
+    description: ''
   };
 
-  addCategory(): void {
-    if (!this.newCategory.name) return;
+  constructor(private http: HttpClient) {}
 
-    this.categories.push({
-      id: Date.now(),
-      name: this.newCategory.name
-    });
-
-    this.resetForm();
+  ngOnInit(): void {
+    this.getAllCategories();
   }
 
-  editCategory(cat: any): void {
-    this.newCategory = { ...cat };
-    this.selectedCategoryId = cat.id;
+  // 🔹 Récupération
+  getAllCategories(): void {
+    this.http.get<Category[]>(this.apiUrl).subscribe(data => {
+      this.categories = data;
+    });
+  }
+
+  // 🔹 Ajout
+  addCategory(): void {
+    if (!this.newCategory.nom) return;
+
+    this.http.post<Category>(this.apiUrl, this.newCategory)
+      .subscribe(cat => {
+        this.categories.push(cat);
+        this.resetForm();
+      });
+  }
+
+  // 🔹 Préparer modification
+  editCategory(cat: Category): void {
+    this.newCategory = {
+      nom: cat.nom,
+      description: cat.description ?? ''
+    };
+    this.selectedCategoryId = cat.idCategorie;
     this.isEditMode = true;
   }
 
+  // 🔹 Mise à jour
   updateCategory(): void {
-    const index = this.categories.findIndex(c => c.id === this.selectedCategoryId);
-    if (index !== -1) {
-      this.categories[index] = { ...this.newCategory };
-    }
-    this.resetForm();
+    this.http.put<Category>(
+      `${this.apiUrl}/${this.selectedCategoryId}`,
+      this.newCategory
+    ).subscribe(() => {
+      this.getAllCategories();
+      this.resetForm();
+    });
   }
 
+  // 🔹 Suppression
   deleteCategory(id: number): void {
-    this.categories = this.categories.filter(c => c.id !== id);
+    this.http.delete(`${this.apiUrl}/${id}`)
+      .subscribe(() => {
+        this.categories = this.categories.filter(c => c.idCategorie !== id);
+      });
   }
 
+  // 🔹 Reset
   resetForm(): void {
-    this.newCategory = { name: '' };
+    this.newCategory = { nom: '', description: '' };
     this.isEditMode = false;
+    this.selectedCategoryId = 0;
   }
 }

@@ -1,24 +1,47 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
+
+/* Interfaces */
+export interface Category {
+  idCategorie: number;
+  nom: string;
+  description?: string;
+}
+
+export interface CategorySend {
+  nom: string;
+  description?: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  private apiUrl = 'http://localhost:8080/api/categories';
+  private apiUrl = `${environment.apiUrl}/categories`;
 
   constructor(private http: HttpClient) {}
 
-  // 🔹 Créer une catégorie
-  create(category: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, category);
+  // 🔹 Récupérer toutes les catégories
+  getAll(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.apiUrl);
+  }
+
+  // 🔹 Récupérer une catégorie par ID
+  getById(id: number): Observable<Category> {
+    return this.http.get<Category>(`${this.apiUrl}/${id}`);
+  }
+
+  // 🔹 Ajouter une catégorie
+  create(category: CategorySend): Observable<Category> {
+    return this.http.post<Category>(this.apiUrl, category);
   }
 
   // 🔹 Modifier une catégorie
-  update(id: number, category: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, category);
+  update(id: number, category: CategorySend): Observable<Category> {
+    return this.http.put<Category>(`${this.apiUrl}/${id}`, category);
   }
 
   // 🔹 Supprimer une catégorie
@@ -26,25 +49,10 @@ export class CategoryService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  // 🔹 Récupérer toutes les catégories
-  getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
-  }
-
-  // 🔹 Récupérer une catégorie par ID
-  getById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
-  }
-
-  // 🔹 Récupérer une catégorie par nom
-  getByNom(nom: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/nom/${nom}`);
-  }
-
   // 🔹 Vérifier si un nom existe déjà
   checkNomExists(nom: string): Observable<boolean> {
-    return this.http.get<boolean>(
-      `${this.apiUrl}/check-nom?nom=${nom}`
-    );
+    return this.http.get<boolean>(`${this.apiUrl}/check-nom`, {
+      params: { nom }
+    });
   }
 }

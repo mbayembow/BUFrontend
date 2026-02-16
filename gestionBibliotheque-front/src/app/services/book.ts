@@ -11,35 +11,18 @@ export class BookService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  // 📖 Get all
+  getAllBooks(): Observable<any> {
+    return this.http.get(this.apiUrl);
   }
 
-  getById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  // ➕ Add
+  addBook(book: any): Observable<any> {
+    return this.http.post(this.apiUrl, book);
   }
 
-  add(book: any): Observable<string> {
-    return this.http.post(this.apiUrl, book, { responseType: 'text' });
-  }
-
-  update(id: number, book: any): Observable<string> {
-    return this.http.put(`${this.apiUrl}/${id}`, book, { responseType: 'text' });
-  }
-
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  search(critere: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/recherche?critere=${critere}`);
-  }
-
-  updateStock(id: number, quantite: number): Observable<string> {
-    return this.http.patch(
-      `${this.apiUrl}/${id}/stock?quantite=${quantite}`,
-      {},
-      { responseType: 'text' }
-    );
+  // ❌ Delete
+  deleteBook(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

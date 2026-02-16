@@ -9,6 +9,8 @@ import {Home} from './components/dashboard/home';
 import { BookComponent } from './components/book/book';
 import { AuteurComponent } from './components/auteur/auteur';
 import { CategoryComponent } from './components/category/category';
+import { EditeurComponent } from './components/editeur/editeur';
+import { EcrireComponent } from './components/ecrire/ecrire';
 
 export const routes: Routes = [
   {path:'inscription', component: Inscription},
@@ -21,6 +23,9 @@ export const routes: Routes = [
   {path:'book',component: BookComponent},
   {path:'auteur',component: AuteurComponent},
   {path:'categorie',component: CategoryComponent},
+  {path:'editeur',component: EditeurComponent},
+  {path:'ecrire',component: EcrireComponent},
+
 
 
   ];
