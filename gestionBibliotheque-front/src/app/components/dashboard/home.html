@@ -1,5 +1,151 @@
-<main class="col-md-12 ms-sm-auto col-lg-10 p-4">
-  <div class="d-flex justify-content-center align-items-center vh-10">
-    <div class="text-md-start">Welcome to dashboard</div>
+<div class="container-fluid bg-light min-vh-100 p-4">
+
+  <!-- ================= BIENVENUE ================= -->
+  <div class="alert alert-primary d-flex align-items-center shadow-sm mb-4">
+    <i class="bi bi-person-badge fs-2 me-3"></i>
+    <div>
+      <h6 class="fw-bold mb-0">
+        Bienvenue, {{ personnel?.prenom }} {{ personnel?.nom }}
+      </h6>
+      <small>Espace Personnel - ID: {{ personnel?.idPersonnel }}</small>
+    </div>
   </div>
-</main>
+
+  <!-- ================= STATISTIQUES ================= -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-3" *ngFor="let s of stats">
+      <div class="card border-0 shadow-sm h-100 text-center">
+        <div class="card-body">
+          <i class="bi {{ s.icon }} fs-2 text-primary"></i>
+          <h3 class="fw-bold mt-2 mb-0">{{ s.value }}</h3>
+          <small class="text-muted">{{ s.label }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CONTENU ================= -->
+  <div class="row g-4">
+
+    <!-- EMPRUNTS -->
+    <div class="col-lg-9">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-header bg-white fw-bold">
+          <i class="bi bi-arrow-repeat me-2"></i>
+          Apperçu sur les emprunts et les livres 
+        </div>
+
+        <div class="list-group list-group-flush">
+
+         <!-- AJOUTER CARTE  --> 
+          
+         <div class="d-flex gap-4 justify-content-center my-5">
+          <!-- Emprunts en cours -->
+          <div class="col-3">
+            <a
+              
+              
+              class="card shadow p-4 text-center text-decoration-none text-dark"
+            >
+              <h6 class="text-muted">Emprunts total</h6>
+              <h2 class="fw-bold">{{ empruntsTotal }}</h2>
+              <small class="text-primary">Voir détails →</small>
+            </a>
+          </div>
+          <!-- Emprunts en retard -->
+          <div class="col-3">
+            <a
+           
+             
+              class="card shadow p-4 text-center text-decoration-none text-dark"
+            >
+              <h6 class="text-muted">Livres total</h6>
+              <h2 class="fw-bold">{{ livreTotal }}</h2>
+              <small class="text-danger">Voir détails →</small>
+            </a>
+          </div>
+          <!-- À retourner -->
+          <div class="col-3">
+            <a
+            
+              
+              class="card shadow p-4 text-center text-decoration-none text-dark"
+            >
+              <h6 class="text-muted">Nombre Utilisateur</h6>
+              <h2 class="fw-bold">{{ nombreUtilisateurs }}</h2>
+              <small class="text-warning">Voir détails →</small>
+            </a>
+          </div>
+        </div>
+
+          
+
+        </div>
+      </div>
+    </div>
+
+    <!-- COLONNE DROITE -->
+    <div class="col-lg-3">
+
+      <!-- ACTIONS RAPIDES -->
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white fw-bold">
+          <i class="bi bi-lightning me-2"></i>
+          Actions rapides
+        </div>
+
+        <div class="card-body d-grid gap-2">
+          <button class="btn btn-primary" (click)="ajouterLivre()">
+            <i class="bi bi-bookmark-plus me-1"></i>
+            Ajouter un livre
+          </button>
+
+          <button class="btn btn-outline-secondary" (click)="gererMembres()">
+            <i class="bi bi-people me-1"></i>
+            Gérer les membres
+          </button>
+
+          <button class="btn btn-outline-info" (click)="supprimerLivre()">
+            <i class="bi bi-trash me-1"></i>
+            Generer les livres 
+          </button>
+
+
+          <button class="btn btn-outline-danger" (click)="livresEnRetard()">
+            <i class="bi bi-exclamation-triangle me-1"></i>
+            Gerer les emprunts 
+          </button>
+
+          <button class="btn btn-outline-dark" (click)="exporterRapport()">
+            <i class="bi bi-file-earmark-arrow-down me-1"></i>
+            Exporter rapport
+          </button>
+        </div>
+      </div>
+
+      <!-- PROFIL -->
+      <div class="card border-0 shadow-sm text-center">
+        <div class="card-body">
+          <span class="badge bg-primary rounded-circle fs-3 p-3 mb-2">
+            {{ personnel?.prenom?.charAt(0) }}{{ personnel?.nom?.charAt(0) }}
+          </span>
+
+          <h6 class="fw-bold mb-0">
+            {{ personnel?.nom }} {{ personnel?.prenom }}
+          </h6>
+
+          <small class="text-muted">
+            {{ personnel?.email }}
+          </small>
+
+          <div class="mt-2">
+            <span class="badge bg-secondary">
+              {{ personnel?.role }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

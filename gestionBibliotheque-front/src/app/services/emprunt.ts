@@ -7,6 +7,12 @@ import {Emprunt} from '../models/emprunt';
   providedIn: 'root'
 })
 export class EmpruntService {
+  exporterRapport() {
+    throw new Error('Method not implemented.');
+  }
+  getEmpruntsRecents(): Observable<any[]> {
+    throw new Error('Method not implemented.');
+  }
 
   private baseUrl = 'http://localhost:8080/api/emprunts';
 

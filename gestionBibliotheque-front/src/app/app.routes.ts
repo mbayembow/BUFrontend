@@ -5,7 +5,7 @@ import { Personne } from './components/personne/personne';
 import { Personnel} from './components/personnel/personnel';
 import { Utilisateur } from './components/utilisateur/utilisateur';
 import {EmpruntFormComponent} from './components/emprunt-form/emprunt-form';
-import {Home} from './components/dashboard/home';
+import {HomeComponent} from './components/dashboard/home';
 
 export const routes: Routes = [
   {path:'inscription', component: Inscription},
@@ -14,7 +14,7 @@ export const routes: Routes = [
   {path:'personnel', component: Personnel},
   {path:'utilisateur', component: Utilisateur},
   {path:'emprunt-form',component:EmpruntFormComponent},
-  {path:'dashboard',component: Home}
+  {path:'dashboard',component: HomeComponent}
 
   ];
 
