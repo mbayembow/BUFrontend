@@ -12,6 +12,9 @@ import { EmpruntPageComponent } from './components/emprunt-page/emprunt-page';
 import { AllEmprunt } from './components/all-emprunt/all-emprunt';
 import { DashboardAdmin } from './components/dashboard-admin/dashboard-admin';
 import { DashboardUser } from './components/dashboard-user/dashboard-user';
+import { RechercherLivre } from './components/rechercher-livre/rechercher-livre';
+import { EditeurComponent } from './components/editeur/editeur';
+import { EcrireComponent } from './components/ecrire/ecrire';
 
 export const routes: Routes = [
 
@@ -36,6 +39,7 @@ export const routes: Routes = [
       { path: 'all-emprunt', component: AllEmprunt },
       {path:'editeur',component: EditeurComponent},
       {path:'ecrire',component: EcrireComponent},
+      { path: 'rechercher-livre', component: RechercherLivre },
 
       // Admin routes
       { path: 'admin/dashboard', component: DashboardAdmin }

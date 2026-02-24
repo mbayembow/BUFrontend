@@ -1,0 +1,36 @@
+<div class="mt-4">
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Rechercher par titre ou auteur"
+      [(ngModel)]="critere"
+      (input)="rechercher()"
+    />
+  </div>
+
+  <div *ngIf="resultatsRecherche.length > 0">
+    <h5>Résultats de recherche :</h5>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col" *ngFor="let livre of resultatsRecherche">
+        <div class="card h-100 border-warning">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Titre :</strong> {{ livre.titre }}</h5>
+            <p class="card-text">
+              <strong>Auteur :</strong> {{ getNomAuteur(livre.idAuteur) }}
+            </p>
+            <p class="card-text"><strong>Quantité :</strong> {{ livre.quantite }}</p>
+            <p class="card-text"><strong>ID :</strong> {{ livre.idLivre }}</p>
+            <p class="card-text"><strong>Status :</strong> {{ livre.status }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="resultatsRecherche.length === 0 && critere">
+    <p class="text-danger">
+      Aucun livre trouvé pour le critère "{{ critere }}"
+    </p>
+  </div>
+</div>

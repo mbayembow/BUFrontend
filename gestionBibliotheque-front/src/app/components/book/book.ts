@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookService } from '../../services/book';
+import { Livre } from '../../models/livre';
 
 @Component({
   selector: 'app-book',
@@ -49,21 +50,34 @@ export class BookComponent implements OnInit {
   // ➕ Ajouter un livre
   addBook(): void {
 
-    const payload = {
-      titre: this.newBook.titre,
-      reference: this.newBook.reference,
-      isbn: this.newBook.isbn,
-      status: this.newBook.status,
-      stock: this.newBook.stock,
-      quantite: this.newBook.quantite,
-      imageUrl: this.newBook.imageUrl,
-
-      // ✅ Relations ManyToOne format correct
-      auteur: { idAuteur: this.newBook.idAuteur },
-      categorie: { idCategorie: this.newBook.idCategorie },
-      editeur: { idEditeur: this.newBook.idEditeur },
-      personnel: { idPersonnel: this.newBook.idPersonnel }
-    };
+//     const payload = {
+//       titre: this.newBook.titre,
+//       reference: this.newBook.reference,
+//       isbn: this.newBook.isbn,
+//       status: this.newBook.status,
+//       stock: this.newBook.stock,
+//       quantite: this.newBook.quantite,
+//       imageUrl: this.newBook.imageUrl,
+//
+//       // ✅ Relations ManyToOne format correct
+//       auteur: { idAuteur: this.newBook.idAuteur },
+//       categorie: { idCategorie: this.newBook.idCategorie },
+//       editeur: { idEditeur: this.newBook.idEditeur },
+//       personnel: { idPersonnel: this.newBook.idPersonnel }
+//     };
+        const payload: Livre = {
+          titre: this.newBook.titre,
+          reference: this.newBook.reference,
+          isbn: this.newBook.isbn,
+          status: this.newBook.status,
+          stock: this.newBook.stock,
+          quantite: this.newBook.quantite,
+          imageUrl: this.newBook.imageUrl,
+          idAuteur: this.newBook.idAuteur,     // direct
+          idCategorie: this.newBook.idCategorie,
+          idEditeur: this.newBook.idEditeur,
+          idPersonnel: this.newBook.idPersonnel
+        };
 
     console.log("Payload envoyé :", payload); // 🔎 DEBUG
 

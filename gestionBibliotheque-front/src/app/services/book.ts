@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+// import { Livre } from '../models/livre';
+import { Livre } from '../models/livre';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +13,23 @@ export class BookService {
 
   constructor(private http: HttpClient) {}
 
-  // 📖 Get all
-  getAllBooks(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  // 📖 Récupérer tous les livres
+  getAllBooks(): Observable<Livre[]> {
+    return this.http.get<Livre[]>(this.apiUrl);
   }
 
-  // ➕ Add
-  addBook(book: any): Observable<any> {
-    return this.http.post(this.apiUrl, book);
+  // 🔎 Rechercher des livres
+  searchBooks(critere: string): Observable<Livre[]> {
+    return this.http.get<Livre[]>(`${this.apiUrl}/recherche`, { params: { critere } });
   }
 
-  // ❌ Delete
-  deleteBook(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  // ➕ Ajouter un livre
+  addBook(book: Livre): Observable<Livre> {
+    return this.http.post<Livre>(this.apiUrl, book);
+  }
+
+  // ❌ Supprimer un livre
+  deleteBook(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
