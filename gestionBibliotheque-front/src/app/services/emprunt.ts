@@ -7,6 +7,12 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class EmpruntService {
+  exporterRapport() {
+    throw new Error('Method not implemented.');
+  }
+  getEmpruntsRecents(): Observable<any[]> {
+    throw new Error('Method not implemented.');
+  }
 
   private baseUrl = 'http://localhost:8080/api/emprunts';
   private currentUserId = 1; // TODO: remplacer par l'ID de l'utilisateur connecté

@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { InscriptionComponent } from './components/inscription/inscription';
 import { ConnexionComponent } from './components/connexion/connexion';
 import { EmpruntFormComponent } from './components/emprunt-form/emprunt-form';
-import { Home } from './components/dashboard/home';
 import { BookComponent } from './components/book/book';
 import { AuteurComponent } from './components/auteur/auteur';
 import { CategoryComponent } from './components/category/category';
@@ -28,7 +27,6 @@ export const routes: Routes = [
     path: '',
     component: Layout,
     children: [
-      { path: 'dashboard', component: Home },
       { path: 'dashboard-user', component: DashboardUser },
       { path: 'book', component: BookComponent },
       { path: 'auteur', component: AuteurComponent },
@@ -42,7 +40,8 @@ export const routes: Routes = [
       { path: 'rechercher-livre', component: RechercherLivre },
 
       // Admin routes
-      { path: 'admin/dashboard', component: DashboardAdmin }
+      { path: 'admin/dashboard', component: DashboardAdmin },
+//       {path:'personnel', component: Personnel}
     ]
   }
 ];
