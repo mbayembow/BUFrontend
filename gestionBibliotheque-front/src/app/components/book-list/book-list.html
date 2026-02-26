@@ -1,0 +1,56 @@
+<div class="card shadow-sm">
+
+  <div class="card-header bg-light">
+    <h5>📖 Liste des livres</h5>
+  </div>
+
+  <div class="table-responsive">
+
+    <table class="table table-bordered table-hover">
+
+      <thead class="table-secondary">
+
+      <tr>
+        <th>ID</th>
+        <th>Titre</th>
+        <th>ISBN</th>
+        <th>Statut</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+
+      </thead>
+
+      <tbody>
+
+      <tr *ngFor="let book of livres">
+
+        <td>{{ book.idLivre }}</td>
+        <td>{{ book.titre }}</td>
+        <td>{{ book.isbn }}</td>
+
+        <td>
+            <span class="badge text-dark "
+                  [ngClass]="book.status === 'Disponible' ? 'bg-success-subtle' : 'bg-danger-subtle'">
+              {{ book.status }}
+            </span>
+        </td>
+
+        <td>{{ book.stock }}</td>
+
+        <td>
+          <button class="btn btn-outline-danger btn-sm"
+                  (click)="deleteBook(book.idLivre)">
+            Supprimer
+          </button>
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

@@ -1,13 +1,17 @@
 <div class="container-fluid bg-light min-vh-75 p-4">
 
   <!-- ================= BIENVENUE ================= -->
-  <div class="alert alert-primary d-flex align-items-center shadow-sm mb-4">
-    <i class="bi bi-person-badge fs-2 me-3"></i>
-    <div>
-      <h6 class="fw-bold mb-0">
-        Bienvenue,
-      </h6>
-      <small>Espace Personnel - ID :</small>
+  <div class="card shadow h-auto p-1">
+    <div class="d-flex align-items-start">
+      <!-- Avatar -->
+      <div class="avatar me-3 my-3">{{ userInitials || '??' }}</div>
+      <!-- Texte de bienvenue -->
+      <div class="me-auto">
+        <h6 class="my-3 text-primary">
+          Bienvenue, {{ user?.prenom }} {{ user?.nom }}
+          <p>Espace Utilisateur: ID => {{ user?.idPersonnel }}</p>
+        </h6>
+      </div>
     </div>
   </div>
 
@@ -92,7 +96,7 @@
         </div>
 
         <div class="card-body d-grid gap-2">
-          <button class="btn btn-primary" (click)="ajouterLivre()">
+          <button class="btn btn-outline-primary" (click)="ajouterLivre()">
             <i class="bi bi-bookmark-plus me-1"></i>
             Ajouter un livre
           </button>
@@ -102,14 +106,14 @@
             Gérer les membres
           </button>
 
-          <button class="btn btn-outline-info" (click)="supprimerLivre()">
+          <button class="btn btn-outline-info" (click)="gererLivre()">
             <i class="bi bi-book me-1"></i>
             Gérer les livres
           </button>
 
 
-          <button class="btn btn-outline-danger" (click)="livresEnRetard()">
-            <i class="bi bi-exclamation-triangle me-1"></i>
+          <button class="btn btn-outline-danger" (click)="gererEmprunt()">
+            <i class="bi bi-journal-arrow-up me-3 ms-1 "></i>
             Gerer les emprunts
           </button>
 

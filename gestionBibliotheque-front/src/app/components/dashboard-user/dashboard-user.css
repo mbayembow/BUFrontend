@@ -9,6 +9,17 @@
   justify-content: center;
   font-weight: bold;
 }
+.avatar1 {
+  width: 38px;
+  height: 38px;
+  background-color: #87CEEB;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
 
 .cursor-pointer {
   cursor: pointer;

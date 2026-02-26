@@ -1,30 +1,32 @@
-<aside [class.collapsed]="isCollapsed" class="bg-secondary-subtle d-flex flex-column vh-100 border-end w-auto">
+<aside [class.collapsed]="isCollapsed" class=" d-flex flex-column vh-100 border-end w-auto bg-ma-couleur">
 
   <!-- Toggle + Logo -->
-  <button class="btn bg-primary-subtle d-flex align-items-center gap-2 p-2 border-0" (click)="toggleSidebar()">
+  <button class="btn btn-outline-warning d-flex align-items-center gap-2 p-2 border-0" (click)="toggleSidebar()">
     <i class="bi text-primary" [ngClass]="isCollapsed ? 'bi-arrow-right-square' : 'bi-arrow-left-square'"></i>
     <span *ngIf="!isCollapsed">
 <!--      <span class="fs-3 fw-bold bg-light text-primary px-2 rounded">B</span>-->
-      <span class="fs-5 fw-semibold text-primary p-2">Bibliothèque</span>
+      <span class="fs-5 fw-semibold  p-1">Bibliothèque</span>
     </span>
   </button>
   <hr>
 
 
-  <span *ngIf="!isCollapsed">
-    <button class="btn bg-primary-subtle d-flex align-items-center gap-2 p-2 border-1  container-fluid my-1">
+
+    <button class="btn btn-outline-secondary d-flex align-items-center gap-2 p-1 border-1  container-fluid my-1">
     <!-- Avatar -->
-    <div class="avatar me-2">
+    <div class="avatar ">
       {{ userInitials }}
     </div>
 
       <!-- Nom -->
-    <span class="fw-semibold text-primary">
+      <span *ngIf="!isCollapsed">
+        <span class="fw-semibold ">
 <!--            {{ user?.prenom}}-->
             {{ user?.nom }}
           </span>
+      </span>
   </button>
-  </span>
+
 
 
   <hr>
@@ -33,36 +35,58 @@
   <!-- Menu -->
   <ul class="nav nav-pills flex-column gap-2 flex-grow-1">
     <li class="nav-item">
-      <a class="nav-link" href="dashboard-user">
-        <i class="bi bi-speedometer2"></i>
+<!--      <a class="nav-link" href="dashboard-user">-->
+<!--        <i class="bi bi-speedometer2"></i>-->
+<!--        <span *ngIf="!isCollapsed">Dashboard</span>-->
+<!--      </a>-->
+      <button class="btn btn-outline-info w-100" (click)="allerDashboard()">
+        <i class="bi bi-house-door text-white  me-4 ms-1"></i>
         <span *ngIf="!isCollapsed">Dashboard</span>
-      </a>
+      </button>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="bi bi-person"></i>
-        <span *ngIf="!isCollapsed">Author</span>
-      </a>
+      <button class="btn btn-outline-primary w-100" (click)="allerAuteur()">
+        <i class="bi bi-person-badge text-white me-3"></i>
+        <span *ngIf="!isCollapsed">Gerer auteurs</span>
+      </button>
+
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="bi bi-book"></i>
-        <span *ngIf="!isCollapsed">Book</span>
-      </a>
+      <button class="btn btn-outline-primary w-100" (click)="allerCathegorie()">
+        <i class="bi bi-tags me-2 text-white ms-1 "></i>
+        <span *ngIf="!isCollapsed">Gerer categories</span>
+      </button>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="emprunt-form">
-        <i class="bi bi-bookmark-plus"></i>
-        <span *ngIf="!isCollapsed">Emprunt</span>
-      </a>
+      <button class="btn btn-outline-primary w-100" (click)="allerEditeur()">
+        <i class="bi bi-pencil-square text-white me-2"></i>
+        <span *ngIf="!isCollapsed">Gerer Editeurs</span>
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="btn btn-outline-info  w-100" (click)="allerLivre()">
+        <i class="bi bi-book me-2 ms-1 text-white"></i>
+        <span *ngIf="!isCollapsed">Gerer Les Livres</span>
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="btn btn-outline-primary  w-100" (click)="allerEmprunt()">
+        <i class="bi bi-journal-arrow-up me-2 ms-1 text-white"></i>
+        <span *ngIf="!isCollapsed"> Gerer Emprunts</span>
+      </button>
     </li>
   </ul>
 
   <hr>
 
   <!-- Profil -->
-  <div class="sidebar-footer d-flex align-items-center gap-2 p-2" *ngIf="!isCollapsed">
-    <img src="https://i.pravatar.cc/40" class="rounded-circle" alt="profil">
-    <span class="fw-semibold">{{nom}}</span>
-  </div>
+<!--  <div class="sidebar-footer d-flex align-items-center gap-2 p-2" *ngIf="!isCollapsed">-->
+<!--    <img src="https://i.pravatar.cc/40" class="rounded-circle" alt="profil">-->
+<!--    <span class="fw-semibold">{{nom}}</span>-->
+<!--  </div>-->
+  <button class="dropdown-item text-danger" (click)="logout()">
+    <i class="bi bi-box-arrow-right bg-danger-subtle rounded-2 px-2 p-0.5 me-3"></i>
+
+    <span *ngIf="!isCollapsed">Déconnexion</span>
+  </button>
 </aside>

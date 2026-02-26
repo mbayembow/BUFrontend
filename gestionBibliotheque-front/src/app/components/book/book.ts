@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookService } from '../../services/book';
 import { Livre } from '../../models/livre';
+import { BookListComponent } from '../book-list/book-list';
 
 @Component({
   selector: 'app-book',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,BookListComponent],
   templateUrl: './book.html',
   styleUrls: ['./book.css']
 })
-export class BookComponent implements OnInit {
-
-  livres: any[] = [];
+export class BookComponent {
 
   newBook: any = {
     titre: '',
@@ -26,92 +25,55 @@ export class BookComponent implements OnInit {
     idAuteur: null,
     idCategorie: null,
     idEditeur: null,
-    idPersonnel: null   // ✅ AJOUT ICI
+    idPersonnel: null
   };
 
   constructor(private bookService: BookService) {}
 
-  ngOnInit(): void {
-    this.loadBooks();
-  }
-
-  // 🔄 Charger tous les livres
-  loadBooks(): void {
-    this.bookService.getAllBooks().subscribe({
-      next: (data) => {
-        this.livres = data;
-      },
-      error: (err) => {
-        console.error('Erreur chargement livres', err);
-      }
-    });
-  }
-
-  // ➕ Ajouter un livre
+  // ➕ Ajouter livre
   addBook(): void {
 
-//     const payload = {
-//       titre: this.newBook.titre,
-//       reference: this.newBook.reference,
-//       isbn: this.newBook.isbn,
-//       status: this.newBook.status,
-//       stock: this.newBook.stock,
-//       quantite: this.newBook.quantite,
-//       imageUrl: this.newBook.imageUrl,
-//
-//       // ✅ Relations ManyToOne format correct
-//       auteur: { idAuteur: this.newBook.idAuteur },
-//       categorie: { idCategorie: this.newBook.idCategorie },
-//       editeur: { idEditeur: this.newBook.idEditeur },
-//       personnel: { idPersonnel: this.newBook.idPersonnel }
-//     };
-        const payload: Livre = {
-          titre: this.newBook.titre,
-          reference: this.newBook.reference,
-          isbn: this.newBook.isbn,
-          status: this.newBook.status,
-          stock: this.newBook.stock,
-          quantite: this.newBook.quantite,
-          imageUrl: this.newBook.imageUrl,
-          idAuteur: this.newBook.idAuteur,     // direct
-          idCategorie: this.newBook.idCategorie,
-          idEditeur: this.newBook.idEditeur,
-          idPersonnel: this.newBook.idPersonnel
-        };
-
-    console.log("Payload envoyé :", payload); // 🔎 DEBUG
+    const payload: Livre = {
+      titre: this.newBook.titre,
+      reference: this.newBook.reference,
+      isbn: this.newBook.isbn,
+      status: this.newBook.status,
+      stock: this.newBook.stock,
+      quantite: this.newBook.quantite,
+      imageUrl: this.newBook.imageUrl,
+      idAuteur: this.newBook.idAuteur,
+      idCategorie: this.newBook.idCategorie,
+      idEditeur: this.newBook.idEditeur,
+      idPersonnel: this.newBook.idPersonnel
+    };
 
     this.bookService.addBook(payload).subscribe({
+
       next: () => {
+
         alert('Livre ajouté avec succès');
+
         this.resetForm();
-        this.loadBooks();
+
       },
+
       error: (err) => {
-        console.error('Erreur ajout livre', err);
-        alert('Erreur lors de l’ajout du livre');
+
+        console.error(err);
+
+        alert('Erreur ajout livre');
+
       }
+
     });
+
   }
 
-  // 🗑️ Supprimer
-  deleteBook(id: number): void {
-    if (!confirm('Supprimer ce livre ?')) return;
-
-    this.bookService.deleteBook(id).subscribe({
-      next: () => {
-        alert('Livre supprimé');
-        this.loadBooks();
-      },
-      error: (err) => {
-        console.error('Erreur suppression', err);
-      }
-    });
-  }
-
-  // ♻️ Reset
+  // reset form
   resetForm(): void {
+
     this.newBook = {
+
       titre: '',
       reference: '',
       isbn: '',
@@ -123,6 +85,9 @@ export class BookComponent implements OnInit {
       idCategorie: null,
       idEditeur: null,
       idPersonnel: null
+
     };
+
   }
+
 }

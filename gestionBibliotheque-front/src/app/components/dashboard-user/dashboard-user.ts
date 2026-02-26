@@ -41,6 +41,7 @@ export class DashboardUser implements OnInit {
   empruntsEnCours: number = 0;
   empruntsEnRetard: number = 0;
   empruntsARetourner: number = 0;
+  empruntRefuser: number = 0;
 
   filterStatut: string = '';
 
@@ -132,6 +133,7 @@ export class DashboardUser implements OnInit {
         this.empruntsEnCours = 0;
         this.empruntsEnRetard = 0;
         this.empruntsARetourner = 0;
+        this.empruntRefuser = 0;
 
         const aujourdHui = new Date();
 
@@ -157,6 +159,7 @@ export class DashboardUser implements OnInit {
               break;
 
             case 'Refuse':
+              this.empruntRefuser++
               break;
           }
         });

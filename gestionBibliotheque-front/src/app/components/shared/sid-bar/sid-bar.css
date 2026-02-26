@@ -1,7 +1,12 @@
 aside {
   width: 250px;
+  height: 100vh;           /* prend toute la hauteur de l’écran */
   transition: width 0.3s;
   overflow: hidden;
+  background-color: #343a40; /* couleur pour voir la sidebar */
+  position: fixed;          /* reste visible au scroll */
+  top: 0;
+  left: 0;
 }
 
 aside.collapsed {
@@ -28,3 +33,13 @@ aside.collapsed {
   justify-content: center;
   font-weight: bold;
 }
+
+cursor-pointer {
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  transition: 0.2s ease-in-out;
+}
+

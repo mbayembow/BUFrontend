@@ -14,6 +14,7 @@ import { DashboardUser } from './components/dashboard-user/dashboard-user';
 import { RechercherLivre } from './components/rechercher-livre/rechercher-livre';
 import { EditeurComponent } from './components/editeur/editeur';
 import { EcrireComponent } from './components/ecrire/ecrire';
+import { BookListComponent } from './components/book-list/book-list';
 
 export const routes: Routes = [
 
@@ -29,6 +30,7 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard-user', component: DashboardUser },
       { path: 'book', component: BookComponent },
+      { path: 'book-list',component: BookListComponent},
       { path: 'auteur', component: AuteurComponent },
       { path: 'categorie', component: CategoryComponent },
       { path: 'emprunt-form', component: EmpruntFormComponent },

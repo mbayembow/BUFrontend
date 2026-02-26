@@ -1,7 +1,7 @@
 <div class="container mt-5">
 
   <div class="card shadow">
-    <div class="card-header bg-primary text-white text-center">
+    <div class="card-header bg-secondary-subtle text-primary text-center">
       <h4>🏢 Gestion des Éditeurs</h4>
     </div>
 
@@ -25,12 +25,12 @@
         </div>
 
         <div class="col-12 text-center mt-3">
-          <button class="btn btn-success me-2" type="submit">
+          <button class="btn btn-outline-success me-2" type="submit">
             {{ isEditMode ? '✏️ Modifier' : '➕ Ajouter' }}
           </button>
 
           <button type="button"
-                  class="btn btn-secondary"
+                  class="btn btn-outline-danger"
                   (click)="reset()">
             ❌ Annuler
           </button>
@@ -44,7 +44,7 @@
   <div class="card shadow mt-4">
     <div class="card-body">
       <table class="table table-striped text-center">
-        <thead class="table-dark">
+        <thead class="table-secondary">
           <tr>
             <th>ID</th>
             <th>Nom</th>
@@ -59,9 +59,9 @@
             <td>{{ e.nom }}</td>
             <td>{{ e.date }}</td>
             <td>
-              <button class="btn btn-warning btn-sm me-2"
+              <button class="btn btn-outline-warning btn-sm me-2"
                       (click)="edit(e)">✏️</button>
-              <button class="btn btn-danger btn-sm"
+              <button class="btn btn-outline-danger btn-sm"
                       (click)="delete(e.idEditeur)">🗑️</button>
             </td>
           </tr>

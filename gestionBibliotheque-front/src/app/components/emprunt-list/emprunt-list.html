@@ -1,5 +1,5 @@
-<table class="table table-striped table-bordered mt-3">
-  <thead class="table-dark">
+  <table class="table  table-bordered mt-3">
+  <thead class="table-secondary">
   <tr>
     <th>ID</th>
     <th>Livre</th>
@@ -15,12 +15,12 @@
     <td>{{ e.livre?.titre }}</td>
     <td>{{ e.utilisateur?.prenom }}</td>
 <!--    <td>{{e.emprunt?.dateEmprunt}}</td>-->
-    <td><span class="badge bg-info">{{ e.statut }}</span></td>
+    <td><span class="badge bg-info-subtle text-dark">{{ e.statut }}</span></td>
     <td>
-      <button class="btn btn-success btn-sm me-1" (click)="valider.emit(e.idEmprunt)">Valider</button>
-      <button class="btn btn-warning btn-sm me-1" (click)="refuser.emit(e.idEmprunt)">Refuser</button>
-      <button class="btn btn-secondary btn-sm me-1" (click)="retourner.emit(e.idEmprunt)">Retour</button>
-      <button class="btn btn-danger btn-sm" (click)="supprimer.emit(e.idEmprunt)">Supprimer</button>
+      <button class="btn btn-outline-success btn-sm me-1" (click)="valider.emit(e.idEmprunt)">Valider</button>
+      <button class="btn btn-outline-warning btn-sm me-1" (click)="refuser.emit(e.idEmprunt)">Refuser</button>
+      <button class="btn btn-outline-secondary btn-sm me-1" (click)="retourner.emit(e.idEmprunt)">Retour</button>
+      <button class="btn btn-outline-danger btn-sm" (click)="supprimer.emit(e.idEmprunt)">Supprimer</button>
     </td>
   </tr>
   </tbody>

@@ -1,6 +1,8 @@
-<div class="card mb-4 shadow rounded-4 container-fluid col-10">
-  <div class="card-header bg-primary-subtle text-primary container-fluid col-12 mb-4">Créer un emprunt</div>
-  <div class="card-body">
+<div class="card mb-4 shadow container-fluid col-12 ">
+  <div class="d-flex justify-content-center">
+    <div class=" avatar2 bg-secondary-subtle text-center  text-primary col-12 mb-3 p-2">Créer un emprunt</div>
+  </div>
+    <div class="card-body">
     <form [formGroup]="empruntForm" (ngSubmit)="enregistrer()">
 
       <div class="row g-3">
@@ -24,9 +26,9 @@
       <div *ngIf="message" class="alert alert-success mt-3">{{ message }}</div>
       <div *ngIf="erreur" class="alert alert-danger mt-3">{{ erreur }}</div>
 
-      <div class="mt-4 text-end">
+      <div class="mt-4 text-end ">
+        <button class="btn btn-outline-success gp-2 me-2" type="submit">Enregistrer</button>
         <button class="btn btn-outline-danger me-2" type="reset" (click)="empruntForm.reset()">Annuler</button>
-        <button class="btn btn-success" type="submit">Enregistrer</button>
       </div>
     </form>
   </div>

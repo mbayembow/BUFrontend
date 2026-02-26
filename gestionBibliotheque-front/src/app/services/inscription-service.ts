@@ -14,4 +14,8 @@ export class InscriptionService {
   inscrire(utilisateur: Utilisateur): Observable<string> {
     return this.http.post(`${this.baseUrl}/inscription`, utilisateur, { responseType: 'text' });
   }
+
+  listUser(): Observable<Utilisateur[]>{
+    return this.http.get<Utilisateur[]>(this.baseUrl);
+    }
 }

@@ -33,5 +33,21 @@
   100% { transform: translate(0, 0); }
 }
 
+.ma-couleur {
+  background-color: #0A2A51; /* couleur de fond */
+  color: white;              /* texte blanc pour contraste */
+}
 
+
+.avatar2 {
+  width: 970px;
+  height: 50px;
+  background-color: #87CEEB;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
 

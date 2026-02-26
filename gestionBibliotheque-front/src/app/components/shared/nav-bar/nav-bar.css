@@ -9,3 +9,16 @@
   justify-content: center;
   font-weight: bold;
 }
+cursor-pointer {
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  transition: 0.2s ease-in-out;
+}
+
+.mon-div {
+  position: relative; /* ou absolute selon contexte */
+  left: 170px; /* décale vers la droite */
+}

@@ -1,0 +1,22 @@
+.avatar {
+  width: 38px;
+  height: 38px;
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  transition: 0.2s ease-in-out;
+}
+

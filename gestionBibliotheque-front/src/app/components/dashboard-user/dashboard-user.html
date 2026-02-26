@@ -2,7 +2,7 @@
     <!-- Header -->
     <div class="row justify-content-center">
       <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 w-100">
-        <div class="card shadow h-auto border-2">
+        <div class="card shadow h-auto ">
           <div class="dashboard-header p-1">
 
             <!-- Header avec avatar, texte et recherche -->
@@ -34,7 +34,7 @@
           </div> <!-- fin dashboard-header -->
         </div> <!-- fin card -->
         <!-- Cards Emprunts -->
-        <div class="d-flex gap-4 justify-content-center my-5">
+        <div class="d-flex gap-5 me-5 justify-content-center my-5">
           <!-- Emprunts en cours -->
           <div class="col-3">
             <a
@@ -42,8 +42,10 @@
               [queryParams]="{ filter: 'en-attente' }"
               class="card shadow p-4 text-center text-decoration-none text-dark"
             >
-              <h6 class="text-muted">Emprunts en cours</h6>
-              <h2 class="fw-bold">{{ empruntsEnCours }}</h2>
+              <h6 class="text-dark">Emprunts en cours</h6>
+              <div class="d-flex justify-content-center">
+                <h2 class=" avatar1 bg-secondary-subtle text-primary text-center">{{ empruntsEnCours }}</h2>
+              </div>
               <small class="text-primary">Voir détails →</small>
             </a>
           </div>
@@ -54,20 +56,24 @@
               [queryParams]="{ filter: 'retard' }"
               class="card shadow p-4 text-center text-decoration-none text-dark"
             >
-              <h6 class="text-muted">En retard</h6>
-              <h2 class="fw-bold">{{ empruntsEnRetard }}</h2>
+              <h6 class="text-dark">Refuser</h6>
+              <div class="d-flex justify-content-center">
+                <h2 class="avatar1 bg-secondary-subtle fw-bold text-danger">{{ empruntRefuser }}</h2>
+              </div>
               <small class="text-danger">Voir détails →</small>
             </a>
           </div>
           <!-- À retourner -->
-          <div class="col-3">
+          <div class="col-3 ">
             <a
               [routerLink]="['dashboard-user']"
               [queryParams]="{ filter: 'a-retourner' }"
               class="card shadow p-4 text-center text-decoration-none text-dark"
             >
               <h6 class="text-muted">À retourner</h6>
-              <h2 class="fw-bold">{{ empruntsARetourner }}</h2>
+              <div class="d-flex justify-content-center">
+                <h2 class="avatar1 bg-secondary-subtle text-warning">{{ empruntsARetourner }}</h2>
+              </div>
               <small class="text-warning">Voir détails →</small>
             </a>
           </div>
@@ -75,7 +81,7 @@
         <!-- Tableau des emprunts filtrés -->
         <div class="container-fluid col-auto card shadow p-3 mt-4">
           <h5 class="mb-3">Mes emprunts</h5>
-          <table class="container-fluid  table table-hover align-middle table-bordered table-active">
+          <table class="container-fluid  table table-hover align-middle table-bordered ">
             <thead>
             <tr>
               <th>Livre</th>
@@ -84,7 +90,7 @@
               <th>Date d'emprunt</th>
               <th>Date de retour</th>
               <th>Statut</th>
-              <th>Retard</th>
+<!--              <th>Retard</th>-->
             </tr>
             </thead>
             <tbody>
